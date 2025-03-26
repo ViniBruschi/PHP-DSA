@@ -41,11 +41,35 @@ class LinkedList {
         $this->length++;
     }
 
-    function printList($list) {
-        $temp = $list->head;
+    function printList() {
+        $temp = $this->head;
         while ($temp != NULL) {
-            echo $temp->value."\n";
+            echo 'Node:'.$temp->value."\n";
             $temp = $temp->next;
+        }
+    }
+
+    function pop() {
+        if ($this->length == 0) {
+            return;
+        }
+        else if ($this->length == 1) {
+            $value = $this->head->value;
+            $this->head = null;
+            $this->tail = null;
+            $this->length = 0;
+            echo 'Removido'.$value."\n";
+        }
+        else {
+            $temp = $this->head;
+            while ($temp->next != $this->tail) {
+                $temp = $temp->next;
+            }
+            $value = $this->tail->value;
+            $this->tail = $temp;
+            $this->tail->next = null;
+            $this->length--;
+            echo 'Removido:'.$value."\n";
         }
     }
 }
@@ -55,10 +79,9 @@ $my_linked_list->append(5);
 $my_linked_list->append(10);
 $my_linked_list->append(6);
 
-$my_linked_list->printList($my_linked_list);
+$my_linked_list->printList();
 
-// echo 'Head: ' . $my_linked_list->head->value . "\n";
-// echo 'Tail: ' . $my_linked_list->tail->value . "\n";
-// echo 'Length: ' . $my_linked_list->length . "\n";
+$my_linked_list->pop();
 
+$my_linked_list->printList();
 ?>
